@@ -3,6 +3,13 @@
 
 #Importing library
 import sys
+import cmd
+import os
+
+#Mood lists:
+lmood_happy = ['happy','good','alright','fun','cheer','overjoy']
+lmood_neutral = ['ok','fine','meh']
+lmood_sad = ['sad','unhappy','tired','upset','uncomfortable']
 
 
 #Player information and their statistics at the start
@@ -36,8 +43,45 @@ def menu():
             sys.exit()  
 
 #Defining the game functions:
-def play():
-    print("")
+#stage 1: gathering data from user before starting the game.
+def basicinfo():
+    print("Hello friend! What is your name?")
+    p_name = input("My name is...: ")
+    print("Well how are you, " + p_name + "?")
+    p_mood = input("I feel...: ")
+    if p_mood.lower in lmood_happy:
+        print("Wow, you're happy today huh? That's great!")
+    if p_mood.lower in lmood_neutral:
+        print("Well, well, well, your day could've gone a bit better don't you think, " + pname + "?")
+    if p_mood.lower in lmood_sad:
+        print("Aww, don't worry, tomorrow will definitely go better than today!")
+    if p_mood.lower == ("sick"):
+        print("Please stay at home, wear a mask, don't go outside and wash your hand regularly!")
+    else:
+        print("Well, interesting!")
+        
+    print("How old are you, " + p_name + "?")
+    while True:
+        try:
+            p_age = int((input(("I am...: "))))
+        except ValueError:
+            print("That's not a number!")
+            break       
+        else:
+            if p_age >= 17:
+                print("Oh, you're probably a Year 13 or out of school then.")             
+            break
+        if p_age == 13:
+            print("Oh, you're probably in Year 9 then.")
+        if p_age == 14:
+            print("Oh, you're possibly in Year 10 then.")    
+        if p_age == 15:
+            print("Oh, you may be are in Year 11 then.")     
+        if p_age == 16:
+            print("Oh, you're probably in Year 12.")
+        else:
+            print("I see.")
+    print("So, " + p_name + "who is " + p_age + "year old, would you like to play a game?")
     
 #Defining the help menu
 def help():
