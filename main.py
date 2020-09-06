@@ -7,7 +7,7 @@ import cmd
 import os
 
 #Mood lists:
-lmood_happy = ['happy','good','alright','fun','cheer','overjoy']
+lmood_happy = ['happy','good','alright','fun','cheer','overjoy','great']
 lmood_neutral = ['ok','fine','meh']
 lmood_sad = ['sad','unhappy','tired','upset','uncomfortable']
 
@@ -27,16 +27,16 @@ def menu():
     print("(-----------------Exit-----------------)")
     choice =  input("Tell me what you wanna do: ")
     if choice.lower() == ("play"):
-        play()
+        basicinfo()
     elif choice.lower() == ("help"):
         help()
     elif choice.lower() == ("exit"):
-        escape()
-    while choice.lower() not in ['play','help','exit']:
+        sys.exit()
+    while choice.lower() not in ['play','help','exit']: #while loop loops back to the question when there's no valid answer
         print("Command unrecognized. Try again?")
         choice =  input("Tell me what you wanna do: ")
         if choice.lower() == ("play"):
-            play()
+            basicinfo()
         elif choice.lower() == ("help"):
             help()
         elif choice.lower() == ("exit"):
@@ -51,17 +51,39 @@ def basicinfo():
     p_mood = input("I feel...: ")
     if p_mood.lower in lmood_happy:
         print("Wow, you're happy today huh? That's great!")
-    if p_mood.lower in lmood_neutral:
-        print("Well, well, well, your day could've gone a bit better don't you think, " + pname + "?")
-    if p_mood.lower in lmood_sad:
+    elif p_mood.lower in lmood_neutral:
+        print("Well, well, well, your day could've gone a bit better don't you think, " + p_name + "?")
+    elif p_mood.lower in lmood_sad:
         print("Aww, don't worry, tomorrow will definitely go better than today!")
-    if p_mood.lower == ("sick"):
+    elif p_mood.lower == ("sick"):
         print("Please stay at home, wear a mask, don't go outside and wash your hand regularly!")
     else:
-        print("Well, interesting!")
-        
-    print("How old are you, " + p_name + "?")
-    while True:
+        print("Well, interesting! It seems like whatever you're feeling is not recognized. Do you want to add your mood into the list of moods?") #add mood item into the list of moods
+        p_addmood = input("Yes/No: ")
+        if p_addmood.lower() == ("yes"):
+          #asking player what mood they're in
+          print("Cheerio! What type of mood are you in?")
+          p_tolist = input("My mood is (Happy, sad or neutral)...: ")
+          #checks if the mood is happy
+          if p_tolist.lower == ("happy"):
+            print("I see that you're happy. That's good!")
+            lmood_happy.append(p_mood)
+            print("The current happy mood list is:")
+            print(lmood_happy)
+          #checks if the mood is sad
+          if p_tolist.lower == ("sad"):
+            print("I see that you're a bit sad. Hope you feel better!")
+            lmood_sad.append(p_mood)
+            print("The current sad mood list is:")
+            print(lmood_sad)
+          #checks if the mood is neutral
+          if p_tolist.lower == ("neutral"):
+            print("I see that you're just fine. I see.")
+            lmood_neutral.append(p_mood)
+            print("The current neutral mood list is:")
+            print(lmood_neutral)          
+    print("How old are you, " + p_name + "?") #ask for age
+    while True: #checks whether or not age is a number or not
         try:
             p_age = int((input(("I am...: "))))
         except ValueError:
@@ -71,18 +93,24 @@ def basicinfo():
             if p_age >= 17:
                 print("Oh, you're probably a Year 13 or out of school then.")             
             break
-        if p_age == 13:
-            print("Oh, you're probably in Year 9 then.")
-        if p_age == 14:
-            print("Oh, you're possibly in Year 10 then.")    
-        if p_age == 15:
-            print("Oh, you may be are in Year 11 then.")     
-        if p_age == 16:
-            print("Oh, you're probably in Year 12.")
-        else:
-            print("I see.")
-    print("So, " + p_name + "who is " + p_age + "year old, would you like to play a game?")
-    
+    if p_age == 13:
+      print("Oh, you're probably in Year 9 then.")
+    elif p_age == 14:
+      print("Oh, you're possibly in Year 10 then.")    
+    elif p_age == 15:
+      print("Oh, you may be are in Year 11 then.")     
+    elif p_age == 16:
+      print("Oh, you're probably in Year 12.")
+    else:
+      print("I see.")
+
+
+#defining the play function
+def g_play():
+
+  print("You're a student at Papatoetoe High. You're walking around the school field to get some fresh air. Suddenly, you saw a piece of trash.")
+
+
 #Defining the help menu
 def help():
     print("#-----------------Help-----------------#")
