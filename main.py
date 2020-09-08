@@ -5,6 +5,7 @@
 import sys
 import cmd
 import os
+import adventurelib
 
 #Mood lists:
 lmood_happy = ['happy','good','alright','fun','cheer','overjoy','great']
@@ -13,26 +14,24 @@ lmood_sad = ['sad','unhappy','tired','upset','uncomfortable']
 
 
 #Player information and their statistics at the start
-class player:
-    def __init__(self):
-        self.name = ''
-        self.points = 0
-myPlayer = player()
-
+p_score = 0
 #Menu function - this will handle player's first inputs in the game.
 def menu():
     print("#------Welcome to Global Citizen.------#")
     print("(-----------------Play-----------------)")
     print("(-----------------Help-----------------)")
+    print("(-------------Check Score--------------)")
     print("(-----------------Exit-----------------)")
     choice =  input("Tell me what you wanna do: ")
     if choice.lower() == ("play"):
         basicinfo()
     elif choice.lower() == ("help"):
         help()
+    elif choice.lower() ==("score"):
+        score()
     elif choice.lower() == ("exit"):
         sys.exit()
-    while choice.lower() not in ['play','help','exit']: #while loop loops back to the question when there's no valid answer
+    while choice.lower() not in ['play','help','score','exit']: #while loop loops back to the question when there's no valid answer
         print("Command unrecognized. Try again?")
         choice =  input("Tell me what you wanna do: ")
         if choice.lower() == ("play"):
@@ -49,39 +48,41 @@ def basicinfo():
     p_name = input("My name is...: ")
     print("Well how are you, " + p_name + "?")
     p_mood = input("I feel...: ")
-    if p_mood.lower in lmood_happy:
+    if p_mood.lower() in lmood_happy: #good mood
         print("Wow, you're happy today huh? That's great!")
-    elif p_mood.lower in lmood_neutral:
+    elif p_mood.lower in lmood_neutral: #neutral mood
         print("Well, well, well, your day could've gone a bit better don't you think, " + p_name + "?")
-    elif p_mood.lower in lmood_sad:
+    elif p_mood.lower() in lmood_sad: #sad mood
         print("Aww, don't worry, tomorrow will definitely go better than today!")
-    elif p_mood.lower == ("sick"):
+    elif p_mood.lower() == ("sick"): #feeling not well
         print("Please stay at home, wear a mask, don't go outside and wash your hand regularly!")
-    else:
+    else: #adding custom mood as the mood wasn't defined in the list/editing the list
         print("Well, interesting! It seems like whatever you're feeling is not recognized. Do you want to add your mood into the list of moods?") #add mood item into the list of moods
         p_addmood = input("Yes/No: ")
         if p_addmood.lower() == ("yes"):
           #asking player what mood they're in
-          print("Cheerio! What type of mood are you in?")
-          p_tolist = input("My mood is (Happy, sad or neutral)...: ")
+            print("Cheerio! What type of mood are you in?")
+            p_tolist = input("My mood is (Happy, sad or neutral)...: ")
           #checks if the mood is happy
-          if p_tolist.lower == ("happy"):
+        if p_tolist.lower() == ("happy"):
             print("I see that you're happy. That's good!")
             lmood_happy.append(p_mood)
             print("The current happy mood list is:")
             print(lmood_happy)
           #checks if the mood is sad
-          if p_tolist.lower == ("sad"):
+        if p_tolist.lower() == ("sad"):
             print("I see that you're a bit sad. Hope you feel better!")
             lmood_sad.append(p_mood)
             print("The current sad mood list is:")
             print(lmood_sad)
           #checks if the mood is neutral
-          if p_tolist.lower == ("neutral"):
+        if p_tolist.lower() == ("neutral"):
             print("I see that you're just fine. I see.")
             lmood_neutral.append(p_mood)
             print("The current neutral mood list is:")
             print(lmood_neutral)          
+        if p_addmood.lower() == ("no"):
+            print("Oh that's fine then! You can continue on...")
     print("How old are you, " + p_name + "?") #ask for age
     while True: #checks whether or not age is a number or not
         try:
@@ -93,23 +94,35 @@ def basicinfo():
             if p_age >= 17:
                 print("Oh, you're probably a Year 13 or out of school then.")             
             break
-    if p_age == 13:
-      print("Oh, you're probably in Year 9 then.")
+    if p_age == 13: #check what year level the user is in
+        print("Oh, you're probably in Year 9 then.")
     elif p_age == 14:
-      print("Oh, you're possibly in Year 10 then.")    
+        print("Oh, you're possibly in Year 10 then.")    
     elif p_age == 15:
-      print("Oh, you may be are in Year 11 then.")     
+        print("Oh, you may be are in Year 11 then.")     
     elif p_age == 16:
-      print("Oh, you're probably in Year 12.")
+        print("Oh, you're probably in Year 12.")
     else:
-      print("I see.")
+        print("I see.") #over 17
+
+    print("Are these details correct?") #asking users to validate their choices.
+    print("Your name is " + p_name + ". You are currently " + str(p_age) + " year old. And you're feeling " + p_mood + " today.") #convert int to str (integer to string)
+    p_confirm = input("Yes/No: ")
+    if p_confirm.lower() == ("yes"):
+        print("Alright then! We shall continue on!")
+    if p_confirm.lower() == ("no"):
+        p_question()
+
 
 
 #defining the play function
-def g_play():
-
-  print("You're a student at Papatoetoe High. You're walking around the school field to get some fresh air. Suddenly, you saw a piece of trash.")
-
+def g_play_stage1():
+    print("You're a student at Papatoetoe High. You're walking around the school field to get some fresh air. Suddenly, you see a piece of plastic trash.")
+    p_choice1 = input("Are you going to leave the trash or pick it up? (leave/pick): ")
+    if p_choice1.lower() == ("pick"):
+        print("You're a very responsible student huh? +50 points for you!")
+    if p_choice1.lower() == ("leave"):
+        print("")
 
 #Defining the help menu
 def help():
@@ -135,6 +148,55 @@ def help():
         if choice.lower() == ("menu"):
             menu()
         elif choice.lower() == ("exit"):
-            sys.exit()      
+            sys.exit() 
+
+#defining the checking score function
+def score():
+    print("Your score is " + str(p_score) + ". To gain more, you can try to do more for the environment!")
+    print("What do you want to do now? (menu, play, help, or exit)... ")
+    choice =  input("Tell me what you wanna do: ")
+    if choice.lower() == ("menu"):
+        menu()
+    elif choice.lower() == ("play"):
+        basicinfo()
+    elif choice.lower() == ("help"):
+        help()
+    elif choice.lower() == ("exit"):
+        sys.exit()  
+    while choice.lower() not in ['play','help','score','exit']: #while loop loops back to the question when there's no valid answer
+        print("It seemed like you didn't put in the correct choice.")
+        choice =  input("Tell me what you wanna do (menu, play, help, or exit): ")
+        if choice.lower() == ("menu"):
+            menu()
+        elif choice.lower() == ("play"):
+            basicinfo()
+        elif choice.lower() == ("help"):
+            help()
+        elif choice.lower() == ("exit"):
+            sys.exit()  
+
+
+#defining the generic questions function
+#this function runs w/o any validation except for age 
+def p_question():
+    print("Well, what do you want to change?")
+    p_change = input("Select what you want to change (name, age or mood):... ")
+    if p_change.lower() == ("name"):
+        p_name = input("So, what's your name? ")
+    if p_change.lower() == ("age"):
+        print ("So, what's your age this time? ")
+    while True: #checks whether or not age is a number or not
+        try:
+            p_age = int((input(("I am...: "))))
+        except ValueError:
+            print("That's not a number!")
+            break       
+        else:
+            if p_age >= 17:
+                print("Oh, you're probably a Year 13 or out of school then.")             
+            break
+    if p_change.lower() == ("mood"):
+        p_mood = ("How are you feeling now? ")
+    print("Alright then, let's move on.")     
 #Runs menu function
 menu()
