@@ -1,3 +1,6 @@
+#adventurelib.py by lordmauve
+#https://github.com/lordmauve/adventurelib
+
 import re
 import sys
 import inspect
@@ -39,6 +42,7 @@ current_context = None
 
 #: The separator that defines the context hierarchy
 CONTEXT_SEP = '.'
+
 
 
 def set_context(new_context):
@@ -552,7 +556,6 @@ def say(msg):
     paragraphs = re.split(r'\n(?:[ \t]*\n)', msg)
     formatted = (textwrap.fill(p.strip(), width=width) for p in paragraphs)
     print('\n\n'.join(formatted))
-
 
 commands = [
     (Pattern('quit'), sys.exit, {}),  # quit command is built-in
