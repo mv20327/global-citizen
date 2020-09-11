@@ -1,5 +1,5 @@
 #Global Citizen by Manh Quyen Vu
-#Version 0.1
+#Version 0.8
 
 #Importing library
 import sys
