@@ -214,6 +214,7 @@ def take_stick():
             r_shed.solved = True #player acquired the stick, which means the area is solved.
             print_slow("You just picked up the stick.\n")
             print_slow("You also gained 20 points.\n")
+            print_slow("You also gained 10 karmas.\n")
             print_slow("Where do you want to go now?\n")
             print_slow("(go to the garden)\n")
     if r_shed.looked == False:
@@ -276,6 +277,8 @@ def get_wrapper():
                 print_slow("You got the stick, and you brought it down.\nHowever, the stick snapped in half when you\ntried to get it down.\n")
                 print_slow("You lost the Wooden Stick!\n")
                 print_slow("You got the plastic red wrapper.\n")
+                print_slow("You got 50 points!\n")
+                print_slow('You got 40 karmas.\n')
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the stream)\n")
                 global p_score
@@ -344,6 +347,7 @@ def fish_trash():
             print_slow("You tried to fish as much as you can...\nand you got a bundle of plastic\nbottles!\n")
             print_slow("You got a bundle of trash!\n")
             print_slow("You got 250 points!\n")
+            print_slow('You got 240 karmas.\n')
             print_slow("Where do you want to go?\n")
             print_slow("(keep going on the path of the stream)\n")
             inventory.add(bundle_trash)
@@ -419,6 +423,7 @@ def ans_yes():
                 print_slow('She seems unimpressed. Maybe if you collected the bundle\nof trash she would be more impressed.\nShe gave you a small bell anyways.')
                 print_slow('You got a small bell!\n')
                 print_slow('You got another 50 points.\n')
+                print_slow('You got 30 karmas.\n')
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the end of the stream)\n")
                 inventory.add(bell)
@@ -434,6 +439,7 @@ def ans_yes():
                 print_slow('She seems unimpressed. Maybe if you collected the red\nwrapper she would be more impressed.\nShe gave you a small bell anyways.')
                 print_slow('You got a small bell!\n')
                 print_slow('You got another 50 points.\n')
+                print_slow('You got 30 karmas.\n')
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the end of the stream)\n")
                 inventory.add(bell)
@@ -448,6 +454,7 @@ def ans_yes():
                 print_slow('She seems impressed. She gave you a bell and a hug!\nAnd just like that, she disappeared into thin\nair.')
                 print_slow('You got a small bell!\n')
                 print_slow('You got another 100 points.\n')
+                print_slow('You got 80 karmas.\n')
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the end of the stream)\n")
                 inventory.add(bell)
@@ -458,7 +465,10 @@ def ans_yes():
 
             else: #nothing is found
                 print_slow("She sensed that you lied.\nShe didn't give you anything.\n")
+                print_slow('You lost 60 points.\n')
+                print_slow('You lost 20 karmas.\n')
                 r_stream_middle.solvedb = True
+                p_score -= 60 
                 p_karma -= 20
 
     if r_stream_middle.solved == True:
@@ -476,6 +486,7 @@ def ans_no():
                 print_slow('She knew you lied, but she still expected better.\nShe looked at the wrapper in disappointment.\nShe gave you a small bell anyways.')
                 print_slow('You got a small bell!\n')
                 print_slow('You got another 30 points.\n')
+                print_slow('You got 20 karmas.\n')
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the end of the stream)\n")
                 inventory.add(bell)
@@ -490,6 +501,7 @@ def ans_no():
                 print_slow('She knew you lied, but she still expected better.\nShe looked at the bundle of bottles in disappointment.\nShe gave you a small bell anyways.')
                 print_slow('You got a small bell!\n')
                 print_slow('You got another 30 points.\n')
+                print_slow('You got 20 karmas.\n')
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the end of the stream)\n")
                 inventory.add(bell)
@@ -498,12 +510,13 @@ def ans_no():
                 r_stream_middle.solvedb = True
                 
 
-            elif r_garden.solved == False and r_stream.solved == False: #both collected
+            elif r_garden.solved == True and r_stream.solved == True: #both collected
                 inventory.discard(bundle_trash)
                 inventory.discard(red_wrapper)
                 print_slow('She seems impressed, however disappointed.\nShe wanted you to say the truth, yet you lied.\nAnd just like that, she disappeared into thin\nair.')
                 print_slow('You got a small bell!\n')
                 print_slow('You got another 70 points.\n')
+                print_slow('You got 50 karmas.\n')
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the end of the stream)\n")
                 inventory.add(bell)
@@ -515,6 +528,7 @@ def ans_no():
             else: #nothing is found
                 print_slow("""\n"Thought so," she said.\nAnd she gave you nothing.\n""")
                 print_slow("You lost -50 points\n")
+                print_slow("You also lost 70 karmas.\n")
                 print_slow("Where do you want to go?\n")
                 print_slow("(go to the end of the stream)\n")
                 p_score -= 50
@@ -526,6 +540,47 @@ def ans_no():
 
 
 #--------------------end of stream/game-----------------------------#
+
+#displaying information about the environment - player did everything
+def positive_facts():
+    if r_stream_end.solved == True:
+        print_slow("Everyday, 8 million pieces of plastic made their way into the oceans.\n")
+        print_slow("There are around 5.25 trillions (5,000,000,000,000) pieces of micro\n")
+        print_slow("plastics that are found in the ocean. Plastics made of 60 to 90 percent\n")
+        print_slow("of debris found in the ocean today.\n")
+        print_slow("Plastics contain nasty chemicals, and this is a huge factor into diseases\n")
+        print_slow("and other nasty things that can happen to our animals and the planet. In\n")
+        print_slow("other words, the more plastics are out there, the more toxic our planet\n")
+        print_slow("becomes, thus greatly increases the chances of us and the animals in the\nsea getting diseases.\n")
+        print_slow("Plastics also take millions of years to be completely decompose, which\n")
+        print_slow("means that once you discard a plastic bottle, it'll last until your\n")
+        print_slow(" great-great-great-great-granddaughter/son is born.\n")
+        print_slow("And this anology can be applied to any thing plastic too, like toys,\n")
+        print_slow("straws, etc.\n")
+        print_slow("If you can save the bird like you did in the game, and collect the trash\n")
+        print_slow("that you and others might throw out, then you are helping our planet more\n")
+        print_slow("and more healthy!\n")
+
+#displaying information about the environment - player did somewhat
+def meh_facts():
+    if r_stream_end.solvedb == True and p_score <= 420:
+        print_slow("A single microplastic bead can be detrimental to the wildlifes in the ocean.\n")
+        print_slow("More than 1,200 species are endangered by them, either by eating it or entang-\n")
+        print_slow("led by the nets that people use out in the sea.\n")
+        print_slow("If you can save the bird like you did in the game, and collect more trash\n")
+        print_slow("that you and others have thrown out, then our planet and its habitants might\n")
+        print_slow("have better chances of becoming more healthy!\n")
+
+#displaying information about the environment - player did little
+def upset_facts():
+    if r_stream_end.solvedc == True and p_score < 320:
+        print_slow("""Toxic chemicals leach out of plastic and are found in the blood and tissue of\n
+            nearly all of us. Exposure to them is linked to cancers, birth defects, impaired immunity,\n
+            endocrine disruption and other ailments.\n""")
+        print_slow("If you put a little bit more care into the environment, then our future on Earth\n")
+        print_slow("might be so much brighter.\n")
+
+#-----------------------------------------------------#
 
 #defining the end of the stream - the end of the game
 @when('the end of the stream')
@@ -550,6 +605,7 @@ Room.have_bird = False
 r_stream_end.have_bird = True
 r_stream_end.solved = False
 r_stream_end.solvedb = False
+r_stream_end.solvedc = False
 
 #save the bird
 @when('save the bird')
@@ -563,7 +619,9 @@ def ring_bell():
                 print_slow('You used the bell from the mysterious lady.\nSurprisingly, the bell made a loud sound\nand the bird flew away.\n')
                 print_slow('You lost The Small Bell!\n')
                 inventory.discard(bell)
-                print_slow('You got 300 points!')
+                print_slow('You got 300 points!\n')
+                print_slow('You got 300 karmas!\n')
+                positive_facts()
                 print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.\nTo exit, put exit.\n")
                 print_slow("(menu/check stats/exit)")
                 global p_score
@@ -576,11 +634,13 @@ def ring_bell():
             print_slow("You don't have the bell! Hmmmmm,\nmaybe you can scream at it!\n")
             print_slow('Well, you screamed at the bird\n... it flew away. Phew!\n')
             print_slow("You got 250 points... You felt\nlike you could've done better.\n")
+            print_slow('You also got 250 karma!\n')
+            meh_facts()
             print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.\nTo exit, put exit.\n")
             print_slow("(menu/check stats/exit)")
             p_score += 250
             p_karma += 250
-            r_stream_end.solved = True
+            r_stream_end.solvedb = True
 
 #ignore the bird... you evil devil!
 @when('ignore the bird')
@@ -594,13 +654,15 @@ def ignore_bird():
             print_slow("Wait a minute...\nIs that... Greta Thunburg?!?\n")
             print_slow("She looked at you, disappointed, just\nlike the mysterious woman.\n")
             print_slow("Then just like that... Poof! She\ndisappeared.\n")
+            upset_facts()
             print_slow('You lost 350 points!')
             print_slow('You lost 200 karmas!')
             print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.")
             print_slow("(menu/check stats/exit)")
             p_score -= 350
             p_karma -= 200
-            r_stream_end.solvedb = True
+            r_stream_end.solvedc = True
+
 
 #----------------------------------------------------------#
 
@@ -639,7 +701,7 @@ def check_stats():
     if p_karma <= 0:
         print_slow("You're on neutral/bad karma.\nYour karma is " + str(p_karma) + ".\n")
     elif p_karma == 10: #got the stick
-        print_slow("You're on neutral karma.\nYour karma is " + str(p_karma) + ".\n")
+        print_slow("You're on neutral/bad karma.\nYour karma is " + str(p_karma) + ".\n")
     elif p_karma == 50:
         print_slow("You're on neutral/bad karma.\nYour karma is " + str(p_karma) + ".\n")
     elif p_karma == 170:
@@ -661,7 +723,7 @@ def check_stats():
     elif p_karma >= 670:
         print_slow("You're on amazing karma.\nYour karma is " + str(p_karma) + ".\n")
     else:
-        print_slow("Your score is " + str(p_karma) + ".\n")
+        print_slow("Your karma is " + str(p_karma) + ".\n")
 
     #check the amount of trash collected
     if r_shed.solved == True:
@@ -683,7 +745,9 @@ def check_stats():
     if r_stream_end.solved == True:
         print_slow("You saved the bird.\n")
     elif r_stream_end.solvedb == True:
-        print_slow("You didn't save the bird\nGreta did.\n")
+        print_slow("You saved the bird.\n")
+    elif r_stream_end.solvedc == True:
+        print_slow("You didn't save the bird.\nGreta did.\n")
 
 #come back to menu at any stages
 @when('menu')
