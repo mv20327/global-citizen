@@ -617,6 +617,9 @@ def ignore_bird():
 @when('statistics')
 @when('statistic')
 def check_stats():
+    #show name:
+    print_slow('Your name is ' + p_name + '.\nYour age is ' + str(p_age) + ".\nYou're currently feeling " + p_mood + ".\n")
+    #check score
     if p_score <= 20: #got the stick
         print_slow("Your score is " + str(p_score) + ".\nTo gain more, you can try\nto do more for the environment!\n")
     elif p_score == 70: #after using stick + getting the wrapper LG :#
@@ -709,6 +712,7 @@ def menu():
     print("#------Welcome to Global Citizen.------#")
     print("(-----------------Play-----------------)")
     print("(-----------------Help-----------------)")
+    print("(----------------Credits---------------)")
     print("(-----------------Exit-----------------)")
     print("What would you like to do?")
     choice =  input("> ")
@@ -716,24 +720,29 @@ def menu():
         basicinfo()
     elif choice.lower() == ("help"):
         help()
+    elif choice.lower() == ("credits"):
+        credits()
     elif choice.lower() == ("exit"):
         sys.exit()
-    while choice.lower() not in ['play','help','score','exit']: #while loop loops back to the question when there's no valid answer
+    while choice.lower() not in ['play','help','credits','exit']: #while loop loops back to the question when there's no valid answer
         print_slow("Command unrecognized. Try again?\n")
         print_slow("What would you like to do?\n")
         choice =  input("> ")
         if choice.lower() == ("play"):
             basicinfo()
+        elif choice.lower() == ("credits"):
+            help()
         elif choice.lower() == ("help"):
             help()
         elif choice.lower() == ("exit"):
             sys.exit()  
 
 #Defining the help menu
+@when('help')
 def help():
     os.system('cls') #since players are **PROBABLY** using windows, to clear the console on cmd/idle, the program must use cls instead of clear
     print("#-----------------Help-----------------#")
-    say("""Hello player. Welcome to Global Citizen.\n
+    print_slow("""Hello player. Welcome to Global Citizen.\n
     Global Citizen is a game where you will \n
     experience and learn about the ramifications \n
     of the plastic use towards the environment. \n
@@ -761,6 +770,33 @@ def help():
             menu()
         elif choice.lower() == ("exit"):
             sys.exit() 
+
+#Defining the help menu
+@when('credits')
+def credits():
+    os.system('cls') #since players are **PROBABLY** using windows, to clear the console on cmd/idle, the program must use cls instead of clear
+    print("#-----------------Acknowledgments-----------------#")
+    print_slow("""
+        Credits to:\n
+        Adventurelib.py - by LordMauve (https://github.com/lordmauve/adventurelib)\n
+        print_slow script: by liil (https://stackoverflow.com/questions/20302331/typing-effect-in-python)\n
+        """)
+    print_slow("What would you like to do?\n(menu/exit)\n")
+    choice =  input("> ")
+    if choice.lower() == ("menu"):
+        os.system('cls')
+        menu()
+    elif choice.lower() == ("exit"):
+        sys.exit()
+    while choice.lower() not in ['menu','exit']:
+        print_slow("Command unrecognized. Try again?\n")
+        print_slow("What would you like to do?\n")
+        choice =  input("> ")
+        if choice.lower() == ("menu"):
+            menu()
+        elif choice.lower() == ("exit"):
+            sys.exit() 
+
 
 
 #defining the age function
