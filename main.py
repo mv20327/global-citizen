@@ -563,7 +563,7 @@ def positive_facts():
 
 #displaying information about the environment - player did somewhat
 def meh_facts():
-    if r_stream_end.solvedb == True and p_score <= 420:
+    if r_stream_end.solvedb == True or p_score <= 420:
         print_slow("A single microplastic bead can be detrimental to the wildlifes in the ocean.\n")
         print_slow("More than 1,200 species are endangered by them, either by eating it or entang-\n")
         print_slow("led by the nets that people use out in the sea.\n")
@@ -573,10 +573,13 @@ def meh_facts():
 
 #displaying information about the environment - player did little
 def upset_facts():
-    if r_stream_end.solvedc == True and p_score < 320:
+    if r_stream_end.solvedc == True or p_score < 320:
         print_slow("""Toxic chemicals leach out of plastic and are found in the blood and tissue of\n
-            nearly all of us. Exposure to them is linked to cancers, birth defects, impaired immunity,\n
-            endocrine disruption and other ailments.\n""")
+            nearly all of us. Exposure to them is linked to cancers, impaired immunity, and many more\n
+            illnesses.\n""")
+        print_slow("If we one by one starting to clean up for our trash and being mindful about what\n")
+        print_slow("we are throwing out then our health and others (including animals) will be more\n")
+        print_slow("healthy.\n")
         print_slow("If you put a little bit more care into the environment, then our future on Earth\n")
         print_slow("might be so much brighter.\n")
 
@@ -621,28 +624,28 @@ def ring_bell():
                 inventory.discard(bell)
                 print_slow('You got 300 points!\n')
                 print_slow('You got 300 karmas!\n')
-                positive_facts()
-                print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.\nTo exit, put exit.\n")
-                print_slow("(menu/check stats/exit)")
                 global p_score
                 p_score += 300
                 global p_karma
                 p_karma += 300
                 r_stream_end.solved = True
+                positive_facts()
+                print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.\nTo exit, put exit.\n")
+                print_slow("(menu/check stats/exit)")
                 break
         else:
             print_slow("You don't have the bell! Hmmmmm,\nmaybe you can scream at it!\n")
             print_slow('Well, you screamed at the bird\n... it flew away. Phew!\n')
             print_slow("You got 250 points... You felt\nlike you could've done better.\n")
             print_slow('You also got 250 karma!\n')
-            meh_facts()
-            print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.\nTo exit, put exit.\n")
-            print_slow("(menu/check stats/exit)")
             p_score += 250
             p_karma += 250
             r_stream_end.solvedb = True
+            meh_facts()
+            print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.\nTo exit, put exit.\n")
+            print_slow("(menu/check stats/exit)")
 
-#ignore the bird... you evil devil!
+#ignore the bird... 
 @when('ignore the bird')
 @when('ignore it')
 @when('leave the bird')
@@ -654,14 +657,14 @@ def ignore_bird():
             print_slow("Wait a minute...\nIs that... Greta Thunburg?!?\n")
             print_slow("She looked at you, disappointed, just\nlike the mysterious woman.\n")
             print_slow("Then just like that... Poof! She\ndisappeared.\n")
-            upset_facts()
             print_slow('You lost 350 points!')
             print_slow('You lost 200 karmas!')
-            print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.")
-            print_slow("(menu/check stats/exit)")
             p_score -= 350
             p_karma -= 200
             r_stream_end.solvedc = True
+            upset_facts()
+            print_slow("Well... that's all! To check your\nstats, put check stats into the\nconsole. To return back to menu,\nput menu in the console.")
+            print_slow("(menu/check stats/exit)")
 
 
 #----------------------------------------------------------#
