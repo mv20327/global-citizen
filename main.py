@@ -682,9 +682,6 @@ def ignore_bird():
 @when('statistics')
 @when('statistic')
 def check_stats():
-    #show name:
-    print_slow('Your name is ' + p_name + '.\nYour age is ' + str(p_age) + ".\nYou're currently feeling " + p_mood + ".\n")
-    #check score
     if p_score <= 20: #got the stick
         print_slow("Your score is " + str(p_score) + ".\nTo gain more, you can try\nto do more for the environment!\n")
     elif p_score == 70: #after using stick + getting the wrapper LG :#
