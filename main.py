@@ -804,7 +804,6 @@ def menu():
 #Defining the help menu
 @when('help')
 def help():
-    os.system('cls') #since players are **PROBABLY** using windows, to clear the console on cmd/idle, the program must use cls instead of clear
     print("#-----------------Help-----------------#")
     print_slow("""Hello player. Welcome to Global Citizen.\n
     Global Citizen is a game where you will \n
