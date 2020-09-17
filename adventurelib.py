@@ -19,6 +19,7 @@ except ImportError:
     except ImportError:
         def get_terminal_size(fallback=(80, 24)):
             return fallback
+import time
 
 __version__ = '1.2.1'
 __all__ = (
@@ -31,6 +32,16 @@ __all__ = (
     'set_context',
     'get_context',
 )
+
+
+#defining print_slow
+#print_slow slower text for a nice slow typing effect for words
+#original source: https://stackoverflow.com/questions/20302331/typing-effect-in-python
+def print_slow(str):
+    for char in str:
+        time.sleep(.0420)
+        sys.stdout.write(char)
+        sys.stdout.flush()
 
 
 #: The current context.
@@ -475,11 +486,16 @@ def when(command, context=None, **kwargs):
 
 
 def help():
-    """Print a list of the commands you can give."""
-    print('Here is a list of the commands you can give:')
-    cmds = sorted(c.orig_pattern for c, _, _ in commands if c.is_active())
-    for c in cmds:
-        print(c)
+    print("#-----------------Help-----------------#")
+    print_slow("Hello player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
+
+#replacing the stock help menu
+#    """Print a list of the commands you can give."""
+#    print('Here is a list of the commands you can give:')
+#    cmds = sorted(c.orig_pattern for c, _, _ in commands if c.is_active())
+#    for c in cmds:
+#        print(c)
+
 
 
 def _available_commands():
