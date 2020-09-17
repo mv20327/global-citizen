@@ -554,7 +554,7 @@ def positive_facts():
         print_slow("becomes, thus greatly increases the chances of us and the animals in the\nsea getting diseases.\n")
         print_slow("Plastics also take millions of years to be completely decompose, which\n")
         print_slow("means that once you discard a plastic bottle, it'll last until your\n")
-        print_slow(" great-great-great-great-granddaughter/son is born.\n")
+        print_slow("great-great-great-great-granddaughter/son is born.\n")
         print_slow("And this anology can be applied to any thing plastic too, like toys,\n")
         print_slow("straws, etc.\n")
         print_slow("If you can save the bird like you did in the game, and collect the trash\n")
@@ -811,7 +811,7 @@ def help():
 @when('credits')
 def credits():
     os.system('cls') #since players are **PROBABLY** using windows, to clear the console on cmd/idle, the program must use cls instead of clear
-    print("#-----------------Acknowledgments-----------------#")
+    print("#-----------------Acknowledgements-----------------#")
     print_slow("""
         Credits to:\n
         Adventurelib.py - by LordMauve (https://github.com/lordmauve/adventurelib)\n
@@ -1040,7 +1040,7 @@ def basicinfo():
                 print_slow("Alright then! We shall continue on!\n")
 
     #asking player to start the game
-    print_slow("So, " + p_name + ", would you like to play a game?\n ")
+    print_slow("So, " + p_name + ", would you like to play a game?\n")
     print_slow("(Yes/No): \n")
     p_play = input("> ")
     #while loop loops back to the question when there's no valid answer
@@ -1051,7 +1051,7 @@ def basicinfo():
         if p_play.lower() == ("yes"):
             g_play()       
     if p_play.lower() == ("no"):
-        print_slow("The game will return you back to the menu now.\n You can try the game later.\n")
+        print_slow("The game will return you back to the menu now.\nYou can try the game later.\n")
         menu()
 
     #run once when user gives a valid answer
@@ -1061,7 +1061,7 @@ def basicinfo():
         g_play()
 
     if p_play.lower() == ("no"):
-        print_slow("The game will return you back to the menu now.\n You can try the game later.\n ")
+        print_slow("The game will return you back to the menu now.\nYou can try the game later.\n ")
         os.system('cls')
         menu()
         
@@ -1074,5 +1074,4 @@ def g_play():
 
 #Runs menu function
 menu()
-print(r_field)
 start()
