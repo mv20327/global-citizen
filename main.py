@@ -1,5 +1,5 @@
 #Global Citizen by Manh Quyen Vu
-#Final
+#Version 0.8
 
 #Importing library
 import sys
@@ -805,19 +805,19 @@ def menu():
 @when('help')
 def help():
     print("#-----------------Help-----------------#")
-    print_slow("Hello player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\nHave fun!\n")
+    print_slow("Hello player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
 
-#Defining the credits menu
+#Defining the help menu
 @when('credits')
 def credits():
     os.system('cls') #since players are **PROBABLY** using windows, to clear the console on cmd/idle, the program must use cls instead of clear
-    print("#-----------------Acknowledgements-----------------#")
+    print("#-----------------Acknowledgments-----------------#")
     print_slow("""
         Credits to:\n
-        Adventurelib.py - by LordMauve\n(https://github.com/lordmauve/adventurelib)\n
-        print_slow script: by liil\n(https://stackoverflow.com/questions/20302331/typing-effect-in-python)\n
+        Adventurelib.py - by LordMauve (https://github.com/lordmauve/adventurelib)\n
+        print_slow script: by liil (https://stackoverflow.com/questions/20302331/typing-effect-in-python)\n
         """)
-    print_slow("\nWhat would you like to do?\n(menu/exit)\n")
+    print_slow("What would you like to do?\n(menu/exit)\n")
     choice =  input("> ")
     if choice.lower() == ("menu"):
         os.system('cls')
