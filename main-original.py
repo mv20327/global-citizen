@@ -748,7 +748,7 @@ def check_stats():
         print_slow("You saved the bird.\n")
     elif r_stream_end.solvedc == True:
         print_slow("You didn't save the bird.\nGreta did.\n")
-        
+
 #come back to menu at any stages
 @when('menu')
 @when('go back menu')
@@ -770,12 +770,70 @@ def exit_game():
     sys.exit()
 
 #-------------done with adventurelib.py setup------------------#
+#Defining the game functions:
+#Menu function - this will handle player's first inputs in the game.
+def menu():
+    print("#------Welcome to Global Citizen.------#")
+    print("(-----------------Play-----------------)")
+    print("(-----------------Help-----------------)")
+    print("(----------------Credits---------------)")
+    print("(-----------------Exit-----------------)")
+    print("What would you like to do?")
+    choice =  input("> ")
+    if choice.lower() == ("play"):
+        basicinfo()
+    elif choice.lower() == ("help"):
+        help()
+    elif choice.lower() == ("credits"):
+        credits()
+    elif choice.lower() == ("exit"):
+        sys.exit()
+    while choice.lower() not in ['play','help','credits','exit']: #while loop loops back to the question when there's no valid answer
+        print_slow("Command unrecognized. Try again?\n")
+        print_slow("What would you like to do?\n")
+        choice =  input("> ")
+        if choice.lower() == ("play"):
+            basicinfo()
+        elif choice.lower() == ("credits"):
+            help()
+        elif choice.lower() == ("help"):
+            help()
+        elif choice.lower() == ("exit"):
+            sys.exit()  
 
 #Defining the help menu
 @when('help')
-def help(): 
-    print_slow("Good day player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
-    print_slow("Now, the program will collect a tiny bit of information from you.\n")
+def help():
+    print("#-----------------Help-----------------#")
+    print_slow("Hello player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
+
+#Defining the help menu
+@when('credits')
+def credits():
+    os.system('cls') #since players are **PROBABLY** using windows, to clear the console on cmd/idle, the program must use cls instead of clear
+    print("#-----------------Acknowledgements-----------------#")
+    print_slow("""
+        Credits to:\n
+        Adventurelib.py - by LordMauve (https://github.com/lordmauve/adventurelib)\n
+        print_slow script: by liil (https://stackoverflow.com/questions/20302331/typing-effect-in-python)\n
+        """)
+    print_slow("What would you like to do?\n(menu/exit)\n")
+    choice =  input("> ")
+    if choice.lower() == ("menu"):
+        os.system('cls')
+        menu()
+    elif choice.lower() == ("exit"):
+        sys.exit()
+    while choice.lower() not in ['menu','exit']:
+        print_slow("Command unrecognized. Try again?\n")
+        print_slow("What would you like to do?\n")
+        choice =  input("> ")
+        if choice.lower() == ("menu"):
+            menu()
+        elif choice.lower() == ("exit"):
+            sys.exit() 
+
+
 
 #defining the age function
 
@@ -805,14 +863,11 @@ def p_question():
     if p_change.lower() == ("mood"):
         p_mood = input("How are you feeling now? ")
         os.system('cls')
-    print_slow("Alright then, let's move on.\n")
-    print_slow("OK then, the game will redirect you to the menu.\n")
-    os.system('cls')
+    print_slow("Alright then, let's move on.\n")     
 
 #stage 1: gathering data from user before starting the game.
 def basicinfo():
     os.system('cls')
-    help_in_game() #call for help before starting the data collection part
     print_slow("Hello friend! What is your name?\n")
     print_slow("My name is...: \n")
     p_name = input("> ") # asking for name
@@ -952,13 +1007,13 @@ def basicinfo():
 
     #asking users to check their information
     print_slow("Are these details correct?\n") 
-    print_slow("Your name is " + str(p_name) + ".\nYou are currently " + str(p_age) + " year old.\nAnd you're feeling " + str(p_mood) + " today.\n") #convert int to str (integer to string)
+    print_slow("Your name is " + p_name + ".\nYou are currently " + str(p_age) + " year old.\nAnd you're feeling " + p_mood + " today.\n") #convert int to str (integer to string)
     print_slow("(Yes/No): \n")
     p_confirm = input("> ")
 
     #run once when user gives a valid answer
     if p_confirm.lower() == ("yes"):
-        print_slow("Excellent!\n")
+        print_slow("Alright then! We shall continue on!\n")
     if p_confirm.lower() == ("no"):
         p_question()
         print("")
@@ -983,11 +1038,9 @@ def basicinfo():
                 print("") 
             if p_confirm.lower() == ("no"):
                 print_slow("Alright then! We shall continue on!\n")
-                print_slow("OK then, the game will redirect you to the menu.\n")
-                os.system('cls')
 
     #asking player to start the game
-    print_slow("Now, " + str(p_name) + ", would you like to play a game?\n")
+    print_slow("So, " + p_name + ", would you like to play a game?\n")
     print_slow("(Yes/No): \n")
     p_play = input("> ")
     #while loop loops back to the question when there's no valid answer
@@ -996,88 +1049,29 @@ def basicinfo():
         print_slow("Do you want to play the game or no?\n")
         p_play = input("> ")
         if p_play.lower() == ("yes"):
-            print_slow("OK then, the game will redirect you to the menu.\n")
-            os.system('cls')
-            menu()          
+            g_play()       
     if p_play.lower() == ("no"):
-        print_slow("The game will exit you back to your desktop now.\nYou can try the game later.\n")
-        os.system('exit')
+        print_slow("The game will return you back to the menu now.\nYou can try the game later.\n")
+        menu()
 
     #run once when user gives a valid answer
     if p_play.lower() == ("yes"):
-        print_slow("Let's play! The game will redirect you to the menu now.\n")
-        os.system("cls")
-        menu()
-    if p_play.lower() == ("no"):
-        print_slow("The game will return you back to your desktop now.\nYou can try the game later.\n ")
-        os.system('cls')
-        os.system('exit')
-        
-
-#Defining the game functions:
-#Menu function - this will handle player's first inputs in the game.
-def menu():
-    print("#------Welcome to Global Citizen.------#")
-    print("(-----------------Play-----------------)")
-    print("(-----------------Help-----------------)")
-    print("(----------------Credits---------------)")
-    print("(-----------------Exit-----------------)")
-    print("What would you like to do?")
-    choice =  input("> ")
-    if choice.lower() == ("play"):
+        print_slow("Alright then! Let's play!\n ")
+        os.system('cls')        
         g_play()
-    elif choice.lower() == ("help"):
-        help()
-    elif choice.lower() == ("credits"):
-        credits()
-    elif choice.lower() == ("exit"):
-        sys.exit()
-    while choice.lower() not in ['play','help','credits','exit']: #while loop loops back to the question when there's no valid answer
-        print_slow("Command unrecognized. Try again?\n")
-        print_slow("What would you like to do?\n")
-        choice =  input("> ")
-        if choice.lower() == ("play"):
-            g_play()
-        elif choice.lower() == ("credits"):
-            help()
-        elif choice.lower() == ("help"):
-            help()
-        elif choice.lower() == ("exit"):
-            sys.exit()  
 
-#Defining the credit menu
-@when('credits')
-def credits():
-    os.system('cls') #since players are **PROBABLY** using windows, to clear the console on cmd/idle, the program must use cls instead of clear
-    print("#-----------------Acknowledgements-----------------#")
-    print_slow("""
-        Credits to:\n
-        Adventurelib.py - by LordMauve (https://github.com/lordmauve/adventurelib)\n
-        print_slow script: by liil (https://stackoverflow.com/questions/20302331/typing-effect-in-python)\n
-        """)
-    print_slow("What would you like to do?\n(menu/exit)\n")
-    choice =  input("> ")
-    if choice.lower() == ("menu"):
+    if p_play.lower() == ("no"):
+        print_slow("The game will return you back to the menu now.\nYou can try the game later.\n ")
         os.system('cls')
         menu()
-    elif choice.lower() == ("exit"):
-        sys.exit()
-    while choice.lower() not in ['menu','exit']:
-        print_slow("Command unrecognized. Try again?\n")
-        print_slow("What would you like to do?\n")
-        choice =  input("> ")
-        if choice.lower() == ("menu"):
-            menu()
-        elif choice.lower() == ("exit"):
-            sys.exit() 
-
+        
 
 #defining the play function
 def g_play():
-    print_slow("OK then, let's play!")
-    os.system('cls')
+    help_in_game()
     print(r_field)
     start()
 
 #Runs menu function
-basicinfo()
+menu()
+start()
