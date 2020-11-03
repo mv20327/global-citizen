@@ -145,6 +145,8 @@ current_room = r_field #default current room is at field
 @when('field')
 @when('go to field')
 @when('go to the field')
+@when('go back to the field')
+@when('go back the field')
 def field():
     #set current_room as global variable
     global current_room
@@ -242,7 +244,6 @@ def ignore_shed():
 #-----------------------garden-----------------------------#
 
 #defining the garden
-@when('keep exploring')
 @when('garden')
 @when('go to garden')
 @when('go to the garden')
@@ -289,7 +290,7 @@ def get_wrapper():
                 break
             else:
                 print_slow("You don't have the stick to get it off.\nSeems like you're out of options... oh wait,\nyou can go back to the field and revisit\nthe shed!\nWhat will you do?\n")
-                print_slow("\n(go back to the field/keep going)\n")
+                print_slow("\n(go to the field/keep going)\n")
         else:
             print_slow("There's no wrapper on the tree anymore.\n")
     else:
@@ -783,7 +784,7 @@ def menu():
     if choice.lower() == ("play"):
         basicinfo()
     elif choice.lower() == ("help"):
-        help()
+        help_menu()
     elif choice.lower() == ("credits"):
         credits()
     elif choice.lower() == ("exit"):
@@ -795,9 +796,9 @@ def menu():
         if choice.lower() == ("play"):
             basicinfo()
         elif choice.lower() == ("credits"):
-            help()
+            credits()
         elif choice.lower() == ("help"):
-            help()
+            help_menu()
         elif choice.lower() == ("exit"):
             sys.exit()  
 
@@ -807,6 +808,25 @@ def help():
     print("#-----------------Help-----------------#")
     print_slow("Hello player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
 
+#Defining the help menu
+def help_menu():
+    print("#-----------------Help-----------------#")
+    print_slow("Hello player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
+    print_slow("What would you like to do?\n(menu/exit)\n")
+    choice =  input("> ")
+    if choice.lower() == ("menu"):
+        os.system('cls')
+        menu()
+    elif choice.lower() == ("exit"):
+        sys.exit()
+    while choice.lower() not in ['menu','exit']:
+        print_slow("Command unrecognized. Try again?\n")
+        print_slow("What would you like to do?\n")
+        choice =  input("> ")
+        if choice.lower() == ("menu"):
+            menu()
+        elif choice.lower() == ("exit"):
+            sys.exit()     
 #Defining the help menu
 @when('credits')
 def credits():

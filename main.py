@@ -1,6 +1,5 @@
 #Global Citizen by Manh Quyen Vu
-#Version 0.8
-
+#Version Final
 #Importing library
 import sys
 import cmd
@@ -145,6 +144,8 @@ current_room = r_field #default current room is at field
 @when('field')
 @when('go to field')
 @when('go to the field')
+@when('go back to the field')
+@when('go back the field')
 def field():
     #set current_room as global variable
     global current_room
@@ -692,7 +693,7 @@ def check_stats():
         print_slow("Your score is " + str(p_score) + ".\nMan, you're on a rollll today!\n")
     elif p_score == 420:
         print_slow("Your score is " + str(p_score) + ".\nMan, amazing!\n")
-    elif p_score == 620: #saved the bird
+    elif p_score == 720: #saved the bird
         print_slow("Your score is " + str(p_score) + ".\nYou truly cared about the environment\nand the small habitants of it,\nincluding us!\n")
     else: #if p_score isnt programmed
         print_slow("Your score is " + str(p_score) + ".\n")
@@ -760,7 +761,7 @@ def go_back_menu():
 @when('help')
 @when('show help')
 def help_in_game():
-    help()
+    help_after_basicinfo()
 
 #exiting the game
 @when('exit')
@@ -775,7 +776,25 @@ def exit_game():
 @when('help')
 def help(): 
     print_slow("Good day player. Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
-    print_slow("Now, the program will collect a tiny bit of information from you.\n")
+
+#defining help after basicinfo()
+def help_after_basicinfo(): 
+    print_slow("Hello friend! Welcome to Global Citizen.\nGlobal Citizen is a game where you will\nexperience and learn about the ramifications\nof the plastic use towards the environment.\nTo play the game, you'll be provided with\noptions and you can type the keyword to do\nthe particular action you want to do in the\nsituation provided.\nThe options that are allowed are usually in brackets\nlike this (menu/exit).\n")
+    print_slow("What would you like to do?\n(menu/exit)\n")
+    choice =  input("> ")
+    if choice.lower() == ("menu"):
+        os.system('cls')
+        menu()
+    elif choice.lower() == ("exit"):
+        sys.exit()
+    while choice.lower() not in ['menu','exit']:
+        print_slow("Command unrecognized. Try again?\n")
+        print_slow("What would you like to do?\n")
+        choice =  input("> ")
+        if choice.lower() == ("menu"):
+            menu()
+        elif choice.lower() == ("exit"):
+            sys.exit() 
 
 #defining the age function
 
@@ -812,7 +831,8 @@ def p_question():
 #stage 1: gathering data from user before starting the game.
 def basicinfo():
     os.system('cls')
-    help_in_game() #call for help before starting the data collection part
+    help() #call for help before starting the data collection part
+    print_slow("Now, the game will collect a tiny bit of information\nfrom you.\n")
     print_slow("Hello friend! What is your name?\n")
     print_slow("My name is...: \n")
     p_name = input("> ") # asking for name
@@ -1027,7 +1047,7 @@ def menu():
     if choice.lower() == ("play"):
         g_play()
     elif choice.lower() == ("help"):
-        help()
+        help_after_basicinfo()
     elif choice.lower() == ("credits"):
         credits()
     elif choice.lower() == ("exit"):
