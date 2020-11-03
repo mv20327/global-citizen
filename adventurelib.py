@@ -474,7 +474,7 @@ def prompt():
 
 def no_command_matches(command):
     """Called when a command is not understood."""
-    print("I don't understand '%s'." % command)
+    print("Seems like you've mistyped this command. Please try again.")
 
 
 def when(command, context=None, **kwargs):
